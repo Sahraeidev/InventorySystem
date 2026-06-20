@@ -89,6 +89,18 @@ class Inventory{
 		}
 	}
 
+	float FindItem(std::string Name)
+	{
+		for(int i = 0; i < Items.size(); i++)
+		{
+			if(Items[i].GetName() == Name)
+			{
+				return Items[i].GetWeight();
+			}
+		}
+		return -1;
+	}
+	
 	private:
 	float currentWeight;
 	float maxWeight;
