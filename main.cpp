@@ -100,13 +100,55 @@ class Inventory{
 		}
 		return -1;
 	}
-	
+
 	private:
 	float currentWeight;
 	float maxWeight;
 	std::vector<Item> Items;
 };
 
+class Character{
+	public:
+
+	Character(std::string n,float hp) : Health(hp),Name(n),MaxHealth(hp) {
+		bIsAlive = true;
+	}
+
+	bool TakeDamage(float Damage){
+		Health-=Damage;
+		if(Health <= 0 )
+		{
+			bIsAlive = false;
+			Health = 0;
+			return false;
+		}
+		return true;
+	}
+
+	void DisplayStats()
+	{
+		std::cout << "NAME : " << Name << std::endl;
+		std::cout << "HEALTH : " << Health << std::endl;
+	}
+	inline float GetHealth() { return Health;}
+	inline std::string GetName() {return Name;}
+
+	protected:
+	bool bIsAlive;
+	float Health;
+	float MaxHealth;
+	std::string Name;
+};
+
+class Player : public Character{
+	public:
+	Player(std::string n, float hp, float maxW) : Character(n, hp), PlayerInventory(maxW) {}
+
+
+	private:
+	Inventory PlayerInventory;
+
+};
 
 int main()
 {
